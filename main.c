@@ -1,23 +1,65 @@
 #include <stdio.h>
-#include <SDL2/SDL.h>
 #include <stdlib.h>
+#include <SDL.h>
+#include <SDL_image.h>
+#include "./mapGame/map.h"
 
-int main(int argc, char const *argv[])
-{
-	SDL_Renderer *renderer;
-	SDL_Window *ecran = NULL;
-	if(SDL_Init(SDL_INIT_VIDEO) == -1){
-		printf("\nNE_PEUT_PAS_INITIALISER %s \n",SDL_GetError());
+int main(int argc, char const *argv[]){
+	int game = 1;
+	SDL_Window* screen = NULL;
+	SDL_Renderer *screen_render = NULL;
+	SDL_Event e;
+
+	if (SDL_Init(SDL_INIT_VIDEO)==-1){
+		printf("SDL not initialise : %s", SDL_GetError());
 		exit(-1);
 	}
-	if(SDL_CreateWindowAndRenderer(680,420 , SDL_WINDOW_UTILITY | SDL_WINDOW_VULKAN | SDL_WINDOW_VULKAN, &ecran , &renderer) == -1){
-		printf("CAN'T CREATE THE SCREEN %s",SDL_GetError());
+	IMG_Init(IMG_INIT_PNG);
+	
+	screen = SDL_CreateWindow("Super Mario", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 840, 500, SDL_WINDOW_SHOWN);
+	if (screen == NULL){
+		printf("Screen not initialise : %s", SDL_GetError());
 		exit(-1);
 	}
-	SDL_SetRenderDrawColor(renderer, 0, 0 , 0, 225);
-	SDL_RenderClear(renderer);
-	SDL_RenderPresent(renderer);
-//	while(1);
+
+	screen_render = SDL_CreateRenderer(screen, -1, SDL_RENDERER_ACCELERATED);
+	if (screen_render == NULL){
+		printf("Render not initialise : %s", SDL_GetError());
+		exit(-1);
+	}else{
+	}
+
+	// map game_map = initMap("./levelFile/lvl1.txt");
+	SDL_Surface *i = NULL;
+	i = IMG_Load("t.png");
+	if (i==NULL)
+	{
+		printf("\n%s\n", IMG_GetError());
+	}else{
+		printf("%p", i);
+	}
+	
+	SDL_Texture *j = SDL_CreateTextureFromSurface(screen_render, i);
+	SDL_RenderCopy(screen_render, j, NULL, NULL);
+	while (game){
+		// printMap(game_map, screen_render);
+		while (SDL_PollEvent(&e)!=0){
+			switch (e.type){
+			case SDL_QUIT:
+				game = 0;
+				break;
+			
+			default:
+				break;
+			}
+		}
+		// SDL_SetRenderDrawColor(screen_render, 255, 255, 255, 255);
+		SDL_RenderClear(screen_render);
+		SDL_RenderPresent(screen_render);
+	}
+	
+	SDL_DestroyRenderer(screen_render);
+	SDL_DestroyWindow(screen);
+	IMG_Quit();
 	SDL_Quit();
-    return 0;
 }
