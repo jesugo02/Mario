@@ -13,6 +13,7 @@ int main(int argc, char const *argv[])
     SDL_Renderer *r;
     SDL_Surface *s;
     SDL_Texture *t;
+    SDL_Texture *u;
 
     SDL_CreateWindowAndRenderer(800, 600, SDL_WINDOW_SHOWN, &w, &r);
     
@@ -35,7 +36,7 @@ int main(int argc, char const *argv[])
         SDL_RenderPresent(r);        
     }
     SDL_FreeSurface(s);
-    SDL_DestroyTexture(t);
+    SDL_DestroyTexture(u);
     SDL_DestroyWindow(w);
     IMG_Quit();
     SDL_Quit();

@@ -23,7 +23,7 @@ int main(int argc, char const *argv[]){
 
 			case SDL_KEYDOWN:
 				switch (e.key.keysym.sym){
-					case  SDLK_a:
+					case  SDLK_RETURN:
 					play(&screen_render);
 					break;
 				}

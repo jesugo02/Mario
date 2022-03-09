@@ -20,6 +20,7 @@ typedef struct Case_map{
 typedef struct Map{
     Case_map **data_map;
     char path[MAX_NAME_FILE_LVL];
+    FILE* file_map;
     SDL_Texture *wall;
     SDL_Texture *sky;
     int map_width;
@@ -27,6 +28,8 @@ typedef struct Map{
 
 int getMapWidth(char *path);
 Map initMap(char *path, SDL_Renderer **screen_renderer);
+void dechargeMapImage(Map *freeImage);
+void destroyMap(Map map_to_destroy);
 SDL_Texture* load_image(char *image_path, SDL_Renderer **screen_renderer);
 void printMap(Map map_lvl, SDL_Renderer **screen_render);
 #endif //MAP_H

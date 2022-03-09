@@ -29,9 +29,10 @@ Map initMap(char *path, SDL_Renderer **screen_renderer){
     FILE *lvl_map = NULL;
     lvl_map = fopen(map_lvl.path, "r");
 
-    if (lvl_map==NULL){
+    map_lvl.file_map=lvl_map;
+
+    if (lvl_map==NULL)
         printf("Error File open : %s", SDL_GetError());
-    }
     
     map_lvl.map_width = getMapWidth(map_lvl.path);
 
@@ -69,6 +70,25 @@ Map initMap(char *path, SDL_Renderer **screen_renderer){
     return map_lvl;
 }
 
+void destroyMap(Map map_to_destroy){
+    int i;
+    fclose(map_to_destroy.file_map);
+
+    SDL_DestroyTexture(map_to_destroy.sky);
+    SDL_DestroyTexture(map_to_destroy.wall);
+
+    for (i = 0; i < MAP_BLOC_HEIGTH; i++)
+        free(map_to_destroy.data_map[i]);
+
+    free(map_to_destroy.data_map);
+}
+
+void dechargeMapImage(Map *freeImage){
+    printf("\n%p\n", freeImage->sky);
+    SDL_DestroyTexture(freeImage->sky);
+    SDL_DestroyTexture(freeImage->wall);
+}
+
 SDL_Texture* load_image(char *image_path, SDL_Renderer **screen_renderer){
 
     SDL_Surface *image_surface = NULL;
@@ -81,6 +101,7 @@ SDL_Texture* load_image(char *image_path, SDL_Renderer **screen_renderer){
         return NULL;
     }else{
         image_texture = SDL_CreateTextureFromSurface(*screen_renderer, image_surface);
+        printf("\n%p\n", image_texture);
         SDL_FreeSurface(image_surface);
         if (image_texture==NULL){
             printf("\nTexture not charge : %s\n", SDL_GetError());
@@ -95,6 +116,9 @@ void printMap(Map map_lvl, SDL_Renderer **screen_render){
     int i, j, map_width;
     SDL_Texture *wall = map_lvl.wall;
     SDL_Texture *sky = map_lvl.sky;
+
+    // printf("\n%p\n", map_lvl.sky);
+
 
     map_width = map_lvl.map_width;
 

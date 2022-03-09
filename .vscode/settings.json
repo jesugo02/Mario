@@ -6,6 +6,7 @@
         "sdl_render.h": "c",
         "map.h": "c",
         "sdl_image.h": "c",
-        "init.h": "c"
+        "init.h": "c",
+        "movemapandplayer.h": "c"
     }
 }
