@@ -7,6 +7,7 @@
         "map.h": "c",
         "sdl_image.h": "c",
         "init.h": "c",
-        "movemapandplayer.h": "c"
+        "movemapandplayer.h": "c",
+        "mario.h": "c"
     }
 }
