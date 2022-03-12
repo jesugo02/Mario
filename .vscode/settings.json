@@ -8,6 +8,10 @@
         "sdl_image.h": "c",
         "init.h": "c",
         "movemapandplayer.h": "c",
-        "mario.h": "c"
+        "mario.h": "c",
+        "utils.h": "c",
+        "time.h": "c",
+        "sdl_thread.h": "c",
+        "sdl_timer.h": "c"
     }
 }

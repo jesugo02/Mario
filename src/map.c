@@ -1,5 +1,6 @@
 #include "../includes/map.h"
 #include "../includes/utils.h"
+#include "../includes/init.h"
 #include <errno.h>
 #include <string.h>
 
@@ -96,15 +97,14 @@ void printMap(Map map_lvl, SDL_Renderer **screen_render){
     SDL_Texture *wall = map_lvl.wall;
     SDL_Texture *sky = map_lvl.sky;
 
-    // printf("\n%p\n", map_lvl.sky);
-
-
     map_width = map_lvl.map_width;
 
     for (i = 0; i < MAP_BLOC_HEIGTH; i++){
         for (j = 0; j < map_width; j++){
+            if(map_lvl.data_map[i][j].case_pos.x >= 0 - UNIT_BLOC_GAME && map_lvl.data_map[i][j].case_pos.x <= SCREEN_WIDTH)
             switch (map_lvl.data_map[i][j].char_case){
                 case WALL:
+
                     if (SDL_RenderCopy(*screen_render, wall, NULL, &(map_lvl.data_map[i][j].case_pos)) == -1){
                         printf("\n Error Rendering : %s\n", SDL_GetError());
                     }
