@@ -81,3 +81,17 @@ void move(int direction, Mario *mario, Map *map, CamGame *cam_game){
     
     }
 }
+
+void jump(Mario *mario, Map *map, CamGame* camGame, int *gravity_status){
+    static int jump_heigth=0;
+
+    if (jump_heigth!=HEIGHT_JUMP){
+        mario->player_position.y--;
+        camGame->cam.y--;
+
+        jump_heigth++;
+    }else{
+        jump_heigth = 0;
+        *gravity_status = 1;    
+    }
+}

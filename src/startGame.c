@@ -8,17 +8,30 @@
 
 void play(SDL_Renderer **screen_renderer){
     SDL_Event e;
-    int continuer=1, timeContinue = SDL_GetTicks(), s=0;
+    int continuer=1, timeContinue = SDL_GetTicks(), s=0, gravity_active = 1;
 
     Map my_map = initMap("levelFile/lvl1.txt", screen_renderer);
     Mario my_mario = initPlayer(screen_renderer);
     CamGame game_camera = initCam(my_mario);
 
     while (continuer){
+        // if(gravity_active && SDL_GetTicks() - timeContinue >= 5){
+        // gravity(&my_mario, &my_map, &game_camera);
+        // // printf("%d\n\n", s++);
+        // timeContinue = SDL_GetTicks();
+        // }else if(!gravity_active && SDL_GetTicks() - timeContinue >= 5){
+        //     jump(&my_mario, &my_map, &game_camera, &gravity_active);
+        //     timeContinue = SDL_GetTicks();
+        // }
+
         if(SDL_GetTicks() - timeContinue >= 5){
-        gravity(&my_mario, &my_map, &game_camera);
-        // printf("%d\n\n", s++);
-        timeContinue = SDL_GetTicks();
+            
+            if (gravity_active)
+                gravity(&my_mario, &my_map, &game_camera);
+            else
+                jump(&my_mario, &my_map, &game_camera, &gravity_active);
+            
+            timeContinue = SDL_GetTicks();
         }
 
         // printf("\nCamera : %d %d\n\nMario : %d %d\n", game_camera.cam.x, game_camera.cam.y, my_mario.player_position.x, my_mario.player_position.y);
@@ -40,8 +53,12 @@ void play(SDL_Renderer **screen_renderer){
 					case  SDLK_LEFT:
                     move(LEFT, &my_mario, &my_map, &game_camera);
 					break;
+
+                    case SDLK_SPACE:
+                    gravity_active = 0;
+                    break;
 				}
-                printf("\nCamera : %d %d\n\nMario : %d %d\n", game_camera.cam.x, game_camera.cam.y, my_mario.player_position.x, my_mario.player_position.y);
+                // printf("\nCamera : %d %d\n\nMario : %d %d\n", game_camera.cam.x, game_camera.cam.y, my_mario.player_position.x, my_mario.player_position.y);
 				break;
 
             }
