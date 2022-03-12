@@ -19,3 +19,20 @@ SDL_Texture* load_image(char *image_path, SDL_Renderer **screen_renderer){
             return image_texture;
     }
 }
+
+void gravity(Mario *mario, Map *map, CamGame *cam_game){
+    int i, j;
+
+    i = cam_game->cam.x / UNIT_BLOC_GAME;
+    j = cam_game->cam.y / UNIT_BLOC_GAME;
+
+    if (map->data_map[j][i].char_case != WALL){
+
+        cam_game->cam.y++;
+        mario->player_position.y++;
+        
+        i = cam_game->cam.x / UNIT_BLOC_GAME;
+        j = cam_game->cam.y / UNIT_BLOC_GAME;
+
+    }
+}

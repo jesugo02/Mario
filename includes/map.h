@@ -30,7 +30,6 @@ typedef struct Map{
 
 int getMapWidth(char *path);
 Map initMap(char *path, SDL_Renderer **screen_renderer);
-void dechargeMapImage(Map *freeImage);
 void destroyMap(Map map_to_destroy);
 SDL_Texture* load_image(char *image_path, SDL_Renderer **screen_renderer);
 void printMap(Map map_lvl, Mario mario, SDL_Renderer **screen_render, CamGame cam);

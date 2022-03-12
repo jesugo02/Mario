@@ -25,17 +25,16 @@ Map initMap(char *path, SDL_Renderer **screen_renderer){
     int i, j;
     char c;
     Map map_lvl;
+    FILE *lvl_map = NULL;
 
     strcpy(map_lvl.path, path);
 
-    FILE *lvl_map = NULL;
     lvl_map = fopen(map_lvl.path, "r");
 
     map_lvl.file_map=lvl_map;
 
     if (lvl_map==NULL)
         printf("Error File open : %s", SDL_GetError());
-    
     map_lvl.map_width = getMapWidth(map_lvl.path);
 
     map_lvl.data_map = calloc(MAP_BLOC_HEIGTH, sizeof(Case_map**));
@@ -85,10 +84,6 @@ void destroyMap(Map map_to_destroy){
     free(map_to_destroy.data_map);
 }
 
-void dechargeMapImage(Map *freeImage){
-    SDL_DestroyTexture(freeImage->sky);
-    SDL_DestroyTexture(freeImage->wall);
-}
 
 void printMap(Map map_lvl, Mario mario, SDL_Renderer **screen_render, CamGame cam){
 

@@ -32,26 +32,3 @@ void printPlayer(Mario mario, SDL_Renderer **screen_render){
 void destroyPlayer(Mario mario){
     SDL_DestroyTexture(mario.player_image);
 }
-
-void gravity(Mario *mario, Map *map, SDL_Renderer **render, CamGame *cam_game){
-    int i, j;
-
-    i = cam_game->cam.x / UNIT_BLOC_GAME;
-    j = cam_game->cam.y / UNIT_BLOC_GAME;
-
-    while (map->data_map[j][i].char_case != WALL){
-
-        cam_game->cam.y++;
-        mario->player_position.y++;
-        
-        i = cam_game->cam.x / UNIT_BLOC_GAME;
-        j = cam_game->cam.y / UNIT_BLOC_GAME;
-
-        // SDL_RenderClear(*render);
-        // printPlayer(*mario, render);
-        // printMap(*map, render);
-        // SDL_RenderPresent(*render);
-
-        // SDL_Delay(10);
-    }
-}

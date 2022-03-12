@@ -61,9 +61,7 @@ void move(int direction, Mario *mario, Map *map, CamGame *cam_game){
                     for (j = 0; j < widthMap; j++)
                         map->data_map[i][j].case_pos.x-=PLAYER_SPEED;
 
-        }
-
-                
+        }       
         
         break;
 

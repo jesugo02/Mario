@@ -1,5 +1,4 @@
 #include "../includes/init.h"
-#include <errno.h>
 
 void initAllScreenAndRenderer(SDL_Window **window, SDL_Renderer **window_renderer){
     

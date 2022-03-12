@@ -1,6 +1,6 @@
 #ifndef GAME_START
 #define GAME_START
-#include <SDL2/SDL.h>
+#include "init.h"
 
 void play(SDL_Renderer **screen_renderer);
 
