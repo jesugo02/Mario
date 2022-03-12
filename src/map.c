@@ -86,21 +86,24 @@ void destroyMap(Map map_to_destroy){
 }
 
 void dechargeMapImage(Map *freeImage){
-    printf("\n%p\n", freeImage->sky);
     SDL_DestroyTexture(freeImage->sky);
     SDL_DestroyTexture(freeImage->wall);
 }
 
-void printMap(Map map_lvl, SDL_Renderer **screen_render){
+void printMap(Map map_lvl, Mario mario, SDL_Renderer **screen_render, CamGame cam){
 
-    int i, j, map_width;
+    int i, j, map_width, j_init, j_end;
     SDL_Texture *wall = map_lvl.wall;
     SDL_Texture *sky = map_lvl.sky;
 
     map_width = map_lvl.map_width;
 
+    j_init = (cam.cam.x - mario.player_position.x) / UNIT_BLOC_GAME;
+    j_end = (cam.cam.x + (SCREEN_WIDTH - mario.player_position.x) + UNIT_BLOC_GAME) / UNIT_BLOC_GAME;
+
+
     for (i = 0; i < MAP_BLOC_HEIGTH; i++){
-        for (j = 0; j < map_width; j++){
+        for (j = j_init; j < j_end; j++){
             if(map_lvl.data_map[i][j].case_pos.x >= 0 - UNIT_BLOC_GAME && map_lvl.data_map[i][j].case_pos.x <= SCREEN_WIDTH)
             switch (map_lvl.data_map[i][j].char_case){
                 case WALL:
@@ -118,5 +121,4 @@ void printMap(Map map_lvl, SDL_Renderer **screen_render){
             }
         }
     }
-
 }

@@ -11,7 +11,6 @@ SDL_Texture* load_image(char *image_path, SDL_Renderer **screen_renderer){
         return NULL;
     }else{
         image_texture = SDL_CreateTextureFromSurface(*screen_renderer, image_surface);
-        printf("\n%p\n", image_texture);
         SDL_FreeSurface(image_surface);
         if (image_texture==NULL){
             printf("\nTexture not charge : %s\n", SDL_GetError());

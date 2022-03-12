@@ -45,16 +45,14 @@ void movePlayer(int direction, Mario *mario){
     }
 }
 
-void move(int direction, Mario *mario, Map *map){
+void move(int direction, Mario *mario, Map *map, CamGame *cam_game){
     int  widthMap = map->map_width, i, j;
     switch (direction)
     {
     case RIGTH:
         if (!(mario->player_position.x + PLAYER_SPEED > SCREEN_WIDTH - MARIO_WIDTH)){
 
-            mario->player_cam.x+=PLAYER_SPEED;
-
-            // printf("%d opposite %d\n",  mario->player_cam.x / UNIT_BLOC_GAME, mario->player_cam.x);
+            cam_game->cam.x+=PLAYER_SPEED;
 
             if (mario->player_position.x != SCREEN_WIDTH * 2/3 || map->data_map[0][widthMap-1].case_pos.x-PLAYER_SPEED < SCREEN_WIDTH-UNIT_BLOC_GAME)
                 mario->player_position.x+= PLAYER_SPEED;
@@ -72,9 +70,7 @@ void move(int direction, Mario *mario, Map *map){
     case LEFT:
         if (!(mario->player_position.x - PLAYER_SPEED < 0)){
 
-            mario->player_cam.x-=PLAYER_SPEED;
-
-            // printf("%d opposite %d\n",  mario->player_cam.x / UNIT_BLOC_GAME, mario->player_cam.x);
+            cam_game->cam.x-=PLAYER_SPEED;
 
             if (mario->player_position.x != SCREEN_WIDTH * 1/3 || map->data_map[0]->case_pos.x+PLAYER_SPEED > 0)
                 mario->player_position.x-= PLAYER_SPEED;

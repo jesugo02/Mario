@@ -2,6 +2,8 @@
 #include "../includes/map.h"
 #include "../includes/moveMapAndPlayer.h"
 #include "../includes/mario.h"
+#include "../includes/cam.h"
+
 
 void play(SDL_Renderer **screen_renderer){
     SDL_Event e;
@@ -9,10 +11,11 @@ void play(SDL_Renderer **screen_renderer){
 
     Map my_map = initMap("levelFile/lvl1.txt", screen_renderer);
     Mario my_mario = initPlayer(screen_renderer);
-    
+    CamGame game_camera = initCam(my_mario);
+
     while (continuer){
 
-        gravity(&my_mario, &my_map, screen_renderer);
+        // gravity(&my_mario, &my_map, screen_renderer);
 
         while (SDL_PollEvent(&e)){
             switch (e.type){
@@ -25,11 +28,11 @@ void play(SDL_Renderer **screen_renderer){
 			case SDL_KEYDOWN:
 				switch (e.key.keysym.sym){
 					case  SDLK_RIGHT:
-                    move(RIGTH, &my_mario, &my_map);
+                    move(RIGTH, &my_mario, &my_map, &game_camera);
 					break;
 
 					case  SDLK_LEFT:
-                    move(LEFT, &my_mario, &my_map);
+                    move(LEFT, &my_mario, &my_map, &game_camera);
 					break;
 				}
 				break;
@@ -39,7 +42,7 @@ void play(SDL_Renderer **screen_renderer){
         }
         SDL_RenderClear(*screen_renderer);
         if (continuer){
-            printMap(my_map, screen_renderer);
+            printMap(my_map, my_mario, screen_renderer, game_camera);
             printPlayer(my_mario, screen_renderer);
         }
         SDL_RenderPresent(*screen_renderer);

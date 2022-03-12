@@ -12,6 +12,7 @@
         "utils.h": "c",
         "time.h": "c",
         "sdl_thread.h": "c",
-        "sdl_timer.h": "c"
+        "sdl_timer.h": "c",
+        "cam.h": "c"
     }
 }

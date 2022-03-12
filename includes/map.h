@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include "mario.h"
+#include "cam.h"
 
 #define UNIT_BLOC_GAME 30//pixels
 #define MAP_BLOC_HEIGTH 10 // Nombre de bloc en hauteur
@@ -31,5 +33,5 @@ Map initMap(char *path, SDL_Renderer **screen_renderer);
 void dechargeMapImage(Map *freeImage);
 void destroyMap(Map map_to_destroy);
 SDL_Texture* load_image(char *image_path, SDL_Renderer **screen_renderer);
-void printMap(Map map_lvl, SDL_Renderer **screen_render);
+void printMap(Map map_lvl, Mario mario, SDL_Renderer **screen_render, CamGame cam);
 #endif //MAP_H
