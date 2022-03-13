@@ -4,7 +4,7 @@
 CamGame initCam(Mario mario){
     CamGame mycam;
 
-    mycam.cam.x = SCREEN_WIDTH /3;
+    mycam.cam.x = SPAUN_POINT;
     mycam.cam.y = mario.player_position.y + MARIO_HEIGTH;
 
     return mycam; 

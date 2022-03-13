@@ -8,7 +8,7 @@
 
 void play(SDL_Renderer **screen_renderer){
     SDL_Event e;
-    int continuer=1, timeContinue = SDL_GetTicks(), s=0, gravity_active = 1;
+    int continuer=1, timeContinue = SDL_GetTicks(), s=0, gravity_active = 1, colision;
 
     Map my_map = initMap("levelFile/lvl1.txt", screen_renderer);
     Mario my_mario = initPlayer(screen_renderer);
@@ -47,18 +47,20 @@ void play(SDL_Renderer **screen_renderer){
 			case SDL_KEYDOWN:
 				switch (e.key.keysym.sym){
 					case  SDLK_RIGHT:
-                    move(RIGTH, &my_mario, &my_map, &game_camera);
+                    colision = testColision(game_camera, my_map, my_mario, RIGTH);
+                    move(RIGTH, &my_mario, &my_map, &game_camera, colision);
 					break;
 
 					case  SDLK_LEFT:
-                    move(LEFT, &my_mario, &my_map, &game_camera);
+                    colision = testColision(game_camera, my_map, my_mario, LEFT);
+                    move(LEFT, &my_mario, &my_map, &game_camera, colision);
 					break;
 
                     case SDLK_SPACE:
                     gravity_active = 0;
                     break;
 				}
-                // printf("\nCamera : %d %d\n\nMario : %d %d\n", game_camera.cam.x, game_camera.cam.y, my_mario.player_position.x, my_mario.player_position.y);
+                printf("\nCamera : %d %d\n\nMario : %d %d\n", game_camera.cam.x, game_camera.cam.y, my_mario.player_position.x, my_mario.player_position.y);
 				break;
 
             }

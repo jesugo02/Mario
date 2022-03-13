@@ -16,7 +16,7 @@ Mario initPlayer(SDL_Renderer **screen_render){
     }
     
 
-    my_mario.player_position.x = SCREEN_WIDTH/3;
+    my_mario.player_position.x = SPAUN_POINT;
     my_mario.player_position.y = 0; // Ajouter une ligne de jeu
     my_mario.player_position.w = MARIO_WIDTH;
     my_mario.player_position.h = MARIO_HEIGTH;

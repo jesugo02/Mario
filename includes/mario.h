@@ -4,7 +4,7 @@
 #include <SDL.h>
 #define MARIO_WIDTH 50
 #define MARIO_HEIGTH 50
-#define PLAYER_SPEED 5
+#define PLAYER_SPEED 7
 enum {SEE_RIGHT, SEE_LEFT};
 
 typedef struct Mario{

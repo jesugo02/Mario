@@ -4,22 +4,6 @@
 #include <errno.h>
 #include <string.h>
 
-int getMapWidth(char *path){
-    FILE* file_lvl = NULL;
-
-    file_lvl = fopen(path, "r");
-
-    if (file_lvl==NULL){
-        printf("File not open %d", errno);
-        exit(-1);
-    }
-    
-    int i=0;
-    while (fgetc(file_lvl)!='\n')
-        i++;
-
-    return i;    
-}
 
 Map initMap(char *path, SDL_Renderer **screen_renderer){
     int i, j;

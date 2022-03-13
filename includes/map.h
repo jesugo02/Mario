@@ -28,7 +28,6 @@ typedef struct Map{
     int map_width;
 } Map;
 
-int getMapWidth(char *path);
 Map initMap(char *path, SDL_Renderer **screen_renderer);
 void destroyMap(Map map_to_destroy);
 SDL_Texture* load_image(char *image_path, SDL_Renderer **screen_renderer);
