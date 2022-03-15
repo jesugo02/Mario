@@ -77,8 +77,8 @@ void printMap(Map map_lvl, Mario mario, SDL_Renderer **screen_render, CamGame ca
 
     map_width = map_lvl.map_width;
 
-    j_init = (cam.cam.x - mario.player_position.x) / UNIT_BLOC_GAME;
-    j_end = (cam.cam.x + (SCREEN_WIDTH - mario.player_position.x) + UNIT_BLOC_GAME) / UNIT_BLOC_GAME;
+    j_init = (cam.cam.x - mario.player_position.x - MARIO_WIDTH/2 ) / UNIT_BLOC_GAME;
+    j_end = (cam.cam.x + (SCREEN_WIDTH - mario.player_position.x - MARIO_WIDTH/2) + UNIT_BLOC_GAME) / UNIT_BLOC_GAME;
 
 
     for (i = 0; i < MAP_BLOC_HEIGTH; i++){
@@ -100,4 +100,5 @@ void printMap(Map map_lvl, Mario mario, SDL_Renderer **screen_render, CamGame ca
             }
         }
     }
+
 }

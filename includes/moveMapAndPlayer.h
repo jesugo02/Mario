@@ -8,7 +8,7 @@
 
 #define SPEED_GAME 4
 
-#define HEIGHT_JUMP MARIO_HEIGTH*2
+#define HEIGHT_JUMP MARIO_HEIGTH
 enum {LEFT, RIGTH, JUMP, DOWN};
 
 void moveMap(int direction, Map *map_to_move, int colision);

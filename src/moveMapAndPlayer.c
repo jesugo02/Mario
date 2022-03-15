@@ -67,6 +67,10 @@ void move(int direction, Mario *mario, Map *map, CamGame *cam_game, int colision
 
 void jump(Mario *mario, Map *map, CamGame* camGame, int *gravity_status){
     static int jump_heigth=0;
+    int i, j;
+
+    i = camGame->cam.x / UNIT_BLOC_GAME;
+    j = camGame->cam.y / UNIT_BLOC_GAME;
 
     if (jump_heigth!=HEIGHT_JUMP){
         mario->player_position.y--;

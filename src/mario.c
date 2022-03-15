@@ -9,7 +9,7 @@ Mario initPlayer(SDL_Renderer **screen_render){
 
     my_mario.state = SEE_RIGHT;
 
-    my_mario.player_image = load_image("image/Mario.png", screen_render);
+    my_mario.player_image = load_image("image/Mario_.png", screen_render);
 
     if (my_mario.player_image == NULL){
         printf("Player not charge\n");

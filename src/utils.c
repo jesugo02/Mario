@@ -21,13 +21,17 @@ SDL_Texture* load_image(char *image_path, SDL_Renderer **screen_renderer){
 }
 
 void gravity(Mario *mario, Map *map, CamGame *cam_game){
-    int i, j;
+    int i, j, i_left, i_right;
 
     i = cam_game->cam.x / UNIT_BLOC_GAME;
+
+    i_left = (cam_game->cam.x - MARIO_WIDTH/2 + 2) / UNIT_BLOC_GAME;
+    i_right = (cam_game->cam.x + MARIO_WIDTH/2 - 2) / UNIT_BLOC_GAME;
+
     j = cam_game->cam.y / UNIT_BLOC_GAME;
 
-    if (map->data_map[j][i].char_case != WALL){
-
+    if (map->data_map[j][i].char_case != WALL && map->data_map[j][i_left].char_case != WALL && map->data_map[j][i_right].char_case !=WALL){
+        
         cam_game->cam.y++;
         mario->player_position.y++;
         
@@ -60,14 +64,14 @@ int testColision(CamGame cam, Map map, Mario mario, int direction){
     switch (direction){
 
         case RIGTH:
-        i_bloc =( cam.cam.x + MARIO_WIDTH + PLAYER_SPEED ) / UNIT_BLOC_GAME;
+        i_bloc =( cam.cam.x + MARIO_WIDTH/2 + PLAYER_SPEED ) / UNIT_BLOC_GAME;
         j_first_bloc = (cam.cam.y - 1) / UNIT_BLOC_GAME ;
 
         j_second_bloc = ( cam.cam.y - UNIT_BLOC_GAME - 1) / UNIT_BLOC_GAME;
 
-        if (map.data_map[j_first_bloc][i_bloc].char_case == WALL){
+        if (i_bloc < map.map_width && map.data_map[j_first_bloc][i_bloc].char_case == WALL){
             return map.data_map[j_first_bloc][i_bloc].case_pos.x - (mario.player_position.x + MARIO_WIDTH);
-        }else if( map.data_map[j_second_bloc][i_bloc].char_case == WALL){
+        }else if(i_bloc < map.map_width && map.data_map[j_second_bloc][i_bloc].char_case == WALL){
             return map.data_map[j_second_bloc][i_bloc].case_pos.x - (mario.player_position.x + MARIO_WIDTH);
         } else if(mario.player_position.x + PLAYER_SPEED > SCREEN_WIDTH - MARIO_WIDTH){
             return SCREEN_WIDTH - (mario.player_position.x + MARIO_WIDTH);
@@ -75,7 +79,7 @@ int testColision(CamGame cam, Map map, Mario mario, int direction){
             return NO_COLISION;
         
         case LEFT:
-        i_bloc =( cam.cam.x - PLAYER_SPEED ) / UNIT_BLOC_GAME;
+        i_bloc =( cam.cam.x - PLAYER_SPEED - MARIO_WIDTH/2 ) / UNIT_BLOC_GAME;
         j_first_bloc = (cam.cam.y - 1) / UNIT_BLOC_GAME ;
 
         j_second_bloc = ( cam.cam.y - UNIT_BLOC_GAME - 1 ) / UNIT_BLOC_GAME;
@@ -84,7 +88,7 @@ int testColision(CamGame cam, Map map, Mario mario, int direction){
             return mario.player_position.x - (map.data_map[j_first_bloc][i_bloc].case_pos.x + UNIT_BLOC_GAME);
         }else if(map.data_map[j_second_bloc][i_bloc].char_case == WALL){
             return mario.player_position.x - (map.data_map[j_second_bloc][i_bloc].case_pos.x + UNIT_BLOC_GAME);
-        } else if(cam.cam.x - PLAYER_SPEED < 0){
+        } else if(cam.cam.x - PLAYER_SPEED - MARIO_WIDTH/2 < 0){
             return mario.player_position.x;
         }else
             return NO_COLISION;
